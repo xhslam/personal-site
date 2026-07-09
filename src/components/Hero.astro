@@ -12,6 +12,7 @@
       preload="metadata"
     >
       <source src="/video/hero-bg.mp4" type="video/mp4" />
+      <source src="/video/hero-bg.mov" type="video/quicktime" />
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-fallback" aria-hidden="true"></div>
@@ -20,7 +21,7 @@
   <div class="hero-content container">
     <p class="hero-label reveal-bounce-hero">FIRST PRINCIPLES · 创造与构建 · 自 2024</p>
     <h1 class="hero-title reveal-bounce-hero">
-      把想法，<br />拆解成可运行的系统。
+      王鑫宇，<br />一个 AI native project engineer
     </h1>
     <p class="hero-desc reveal-bounce-hero">
       独立开发者 · AI Agent 构建者 · 产品设计师。<br />
@@ -200,7 +201,12 @@
 <script>
   const video = document.querySelector('.hero-video') as HTMLVideoElement;
   if (video) {
-    video.addEventListener('error', () => video.classList.add('is-hidden'));
-    video.play().catch(() => video.classList.add('is-hidden'));
+    video.addEventListener('loadeddata', () => video.classList.remove('is-hidden'));
+    video.addEventListener('emptied', () => {
+      if (video.error) video.classList.add('is-hidden');
+    });
+    video.play().catch(() => {
+      /* autoplay blocked — video still visible, user can tap to play */
+    });
   }
 </script>

@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+---
+
+<Layout title={`${post.data.title} · 文章`}>
+  <Nav />
+  <main class="article-page">
+    <aside class="article-toc" id="article-toc">
+      {toc.length > 0 && (
+        <nav aria-label="目录">
+          <ul class="toc-list">
+            {toc.map((h) => (
+              <li class={`toc-item depth-${h.depth}`}>
+                <a href={`#${h.slug}`} class="toc-link" data-slug={h.slug}>
+                  <span class="toc-dot"></span>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </aside>
+
+    <article class="article-main">
+      <header class="article-header">
+        <a href="/writing" class="article-breadcrumb">WRITING · 文章</a>
+        <h1 class="article-h1">{post.data.title}</h1>
+        <p class="article-meta-line">
+          {formatDate(post.data.date)}
+          {post.data.readTime && ` · ${post.data.readTime} 分钟`}
+          {post.data.series && ` · ${post.data.series}`}
+        </p>
+      </header>
+
+      <div class="prose-article">
+        <Content />
+      </div>
+
+      <footer class="article-footer">
+        <a href="/writing" class="text-link">← 返回文章列表</a>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<script src="../../scripts/reveal-fade.ts"></script>
+<script src="../../scripts/article-toc.ts"></script>
+
+<style>
+  .article-page {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 720px);
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 48px 80px;
+    justify-content: center;
+  }
+
+  .article-toc {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .toc-link:hover,
+  .toc-link.active {
+    color: var(--text-primary);
+  }
+
+  .toc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid var(--text-muted);
+    flex-shrink: 0;
+    margin-top: 6px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .toc-link.active .toc-dot {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+
+  .toc-item.depth-3 .toc-link {
+    padding-left: 16px;
+    font-size: 12px;
+  }
+
+  .article-breadcrumb {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .article-breadcrumb:hover {
+    color: var(--text-primary);
+  }
+
+  .article-h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .article-meta-line {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .article-footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  @media (max-width: 1024px) {
+    .article-page {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-top: 100px;
+    }
+
+    .article-toc {
+      display: none;
+    }
+  }
+</style>

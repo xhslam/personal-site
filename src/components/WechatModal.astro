@@ -1,0 +1,87 @@
+<div class="wechat-modal" id="wechat-modal" aria-hidden="true">
+  <div class="wechat-modal-backdrop" data-close-modal></div>
+  <div class="wechat-modal-panel" role="dialog" aria-labelledby="wechat-modal-title">
+    <button class="wechat-modal-close" type="button" aria-label="关闭" data-close-modal>×</button>
+    <div class="wechat-modal-header">
+      <img src="/wechat-qr.png" alt="微信二维码" class="wechat-modal-qr" width="280" height="280" />
+    </div>
+    <p class="wechat-modal-hint" id="wechat-modal-title">扫二维码，添加我为朋友</p>
+  </div>
+</div>
+
+<style>
+  .wechat-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .wechat-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .wechat-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+  }
+
+  .wechat-modal-panel {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px 40px 28px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    transform: scale(0.96);
+    transition: transform 0.3s ease;
+  }
+
+  .wechat-modal.is-open .wechat-modal-panel {
+    transform: scale(1);
+  }
+
+  .wechat-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+
+  .wechat-modal-close:hover {
+    color: #333;
+  }
+
+  .wechat-modal-qr {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .wechat-modal-hint {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888888;
+    line-height: 1.5;
+  }
+</style>

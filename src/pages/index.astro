@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Works from '../components/Works.astro';
+import Writing from '../components/Writing.astro';
+import Now from '../components/Now.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Nav />
+  <main>
+    <Hero />
+    <Works />
+    <Writing />
+    <Now />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script src="../scripts/reveal-fade.ts"></script>
+
+<script>
+  const links = document.querySelectorAll('.nav-link, .footer-links a, [href^="#"]');
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = (link as HTMLAnchorElement).getAttribute('href');
+      if (href?.startsWith('#') && href.length > 1) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        target?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

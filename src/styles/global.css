@@ -1,0 +1,233 @@
+:root {
+  --bg-primary: #000000;
+  --bg-elevated: #0a0a0a;
+  --bg-card: #111111;
+  --bg-card-alt: #161616;
+  --bg-glass: rgba(18, 18, 18, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #888888;
+  --text-muted: #666666;
+  --text-body: #cccccc;
+  --border-subtle: #222222;
+  --border-default: #333333;
+  --border-strong: rgba(255, 255, 255, 0.08);
+  --accent-green: #00ff00;
+  --surface-glass: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.03);
+  --font-sans: "Inter", "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", "Fira Code", monospace;
+  --font-display: "Playfair Display", Georgia, serif;
+  --max-width: 1200px;
+  --article-width: 720px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.section {
+  padding: 120px 0;
+  position: relative;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+.divider-h {
+  height: 1px;
+  background: var(--border-subtle);
+  width: 100%;
+}
+
+.chapter-number {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 120px);
+  font-weight: 300;
+  -webkit-text-stroke: 1px #444;
+  color: transparent;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.chapter-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.text-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.text-link:hover {
+  color: var(--text-primary);
+}
+
+/* ── 渐入渐出 · Scroll Reveal ── */
+.reveal-bounce,
+.reveal-bounce-hero {
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-bounce.is-visible,
+.reveal-bounce-hero.is-visible {
+  opacity: 1;
+}
+
+.reveal-bounce.is-hidden {
+  opacity: 0;
+}
+
+.reveal-bounce.is-visible.bounce-hover:hover {
+  opacity: 0.75;
+  transition-duration: 0.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-bounce,
+  .reveal-bounce-hero {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+}
+
+/* ── 文章正文排版 ── */
+.prose-article {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-body);
+}
+
+.prose-article :global(h2) {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 60px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.prose-article :global(h3) {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.prose-article :global(p) {
+  margin-bottom: 24px;
+}
+
+.prose-article :global(strong) {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose-article :global(ul),
+.prose-article :global(ol) {
+  margin-bottom: 24px;
+  padding-left: 24px;
+}
+
+.prose-article :global(li) {
+  margin-bottom: 8px;
+}
+
+.prose-article :global(blockquote) {
+  border-left: 2px solid var(--border-default);
+  padding-left: 24px;
+  margin: 32px 0;
+  color: var(--text-tertiary);
+}
+
+.prose-article :global(a) {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-article :global(hr) {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: 48px 0;
+}
+
+.prose-article :global(code) {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-card);
+  padding: 2px 6px;
+  border-radius: 4px;
+}

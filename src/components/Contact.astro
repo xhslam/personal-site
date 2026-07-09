@@ -1,0 +1,142 @@
+---
+const GITHUB_URL = 'https://github.com/phandung2ea5d4-oss';
+---
+
+<section class="section contact" id="contact">
+  <div class="container">
+    <span class="contact-tag reveal-bounce" data-reveal-delay="0ms">CONTACT · 联系</span>
+    <h2 class="section-title reveal-bounce" data-reveal-delay="80ms">想取得联系？</h2>
+    <p class="section-desc contact-desc reveal-bounce" data-reveal-delay="160ms">
+      对产品、Agent 或合作感兴趣——欢迎通过以下方式找到我。
+    </p>
+
+    <div class="contact-cards">
+      <div class="contact-card reveal-bounce bounce-hover" data-reveal-delay="280ms">
+        <span class="contact-card-label">PRIMARY · 第一入口</span>
+        <div class="contact-card-body">
+          <div>
+            <h3 class="contact-card-title">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                GitHub · phandung2ea5d4-oss
+              </a>
+            </h3>
+            <p class="contact-card-text">
+              代码、项目更新与开源贡献。Auris 与 Knowcraft 的开发日志也会在这里同步。
+            </p>
+          </div>
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="contact-btn">
+            访问 GitHub →
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-card reveal-bounce bounce-hover" data-reveal-delay="360ms">
+        <span class="contact-card-label">WECHAT · 微信</span>
+        <div class="contact-card-body">
+          <div>
+            <h3 class="contact-card-title">微信 · 落花流水</h3>
+            <p class="contact-card-text">
+              扫码添加好友，交流产品、Agent 或合作事宜。
+            </p>
+          </div>
+          <button type="button" class="contact-btn" data-wechat-modal>
+            扫码关注 →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+  }
+
+  .contact-desc { margin-bottom: 48px; }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contact-card {
+    border: 1px solid var(--border-default);
+    padding: 48px;
+  }
+
+  .contact-card-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .contact-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  .contact-card-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .contact-card-title a {
+    transition: opacity 0.2s;
+  }
+
+  .contact-card-title a:hover {
+    opacity: 0.8;
+  }
+
+  .contact-card-text {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .contact-btn {
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    padding: 12px 24px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .contact-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+
+  @media (max-width: 768px) {
+    .contact-card { padding: 32px 24px; }
+
+    .contact-card-body {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

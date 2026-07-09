@@ -1,0 +1,116 @@
+---
+const items = [
+  {
+    year: '进行中',
+    title: '考研 · 系统性备考',
+    desc: '按科目拆解知识框架，每日固定学习块，把 long-term 目标变成可执行的复习节奏。',
+    tag: 'STUDY · EXAM',
+  },
+  {
+    year: '进行中',
+    title: '健身 · 力量与体能',
+    desc: '每周规律训练，追踪重量与恢复——身体是所有 build 的基础设施。',
+    tag: 'FITNESS · TRAIN',
+  },
+  {
+    year: '进行中',
+    title: 'Build · 持续构建',
+    desc: 'Auris、Knowcraft 与个人项目并行迭代——把想法变成能跑、能用的东西。',
+    tag: 'BUILD · SHIP',
+  },
+];
+---
+
+<section class="section now" id="now">
+  <div class="container">
+    <div class="now-header reveal-bounce" data-reveal-delay="0ms">
+      <span class="now-label-left">NOW · 正在发生</span>
+      <span class="now-label-right">更新于 2026-07-10</span>
+    </div>
+    <h2 class="section-title reveal-bounce" data-reveal-delay="80ms">当下</h2>
+    <p class="section-desc now-desc reveal-bounce" data-reveal-delay="160ms">
+      不是规划——是此刻真实在备考、在训练、在构建的东西。
+    </p>
+
+    <div class="timeline">
+      {items.map((item, i) => (
+        <div class="timeline-row reveal-bounce bounce-hover" data-reveal-delay={`${240 + i * 100}ms`}>
+          <span class="timeline-year">{item.year}</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">{item.title}</h3>
+            <p class="timeline-desc">{item.desc}</p>
+          </div>
+          <span class="timeline-tag">{item.tag}</span>
+        </div>
+      ))}
+    </div>
+
+    <a href="#works" class="text-link timeline-cta reveal-bounce" data-reveal-delay="540ms">完整动态 →</a>
+  </div>
+</section>
+
+<style>
+  .now-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .now-label-left,
+  .now-label-right {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .now-desc { margin-bottom: 48px; }
+
+  .timeline { margin-bottom: 48px; }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 180px;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    align-items: start;
+  }
+
+  .timeline-year {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding-top: 4px;
+  }
+
+  .timeline-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .timeline-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+    padding-top: 6px;
+  }
+
+  .timeline-cta { display: inline-block; }
+
+  @media (max-width: 768px) {
+    .timeline-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .timeline-tag { text-align: left; }
+  }
+</style>

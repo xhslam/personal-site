@@ -1,0 +1,206 @@
+---
+---
+
+<section class="hero" id="hero">
+  <div class="hero-video-wrap">
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="/video/hero-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-fallback" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero-content container">
+    <p class="hero-label reveal-bounce-hero">FIRST PRINCIPLES · 创造与构建 · 自 2024</p>
+    <h1 class="hero-title reveal-bounce-hero">
+      把想法，<br />拆解成可运行的系统。
+    </h1>
+    <p class="hero-desc reveal-bounce-hero">
+      独立开发者 · AI Agent 构建者 · 产品设计师。<br />
+      用第一性原理思考，用代码和 Agent 把复杂问题变成简洁的产品。
+    </p>
+
+    <div class="hero-grid">
+      <div class="hero-grid-item reveal-bounce-hero">
+        <span class="hero-grid-label">身份</span>
+        <span class="hero-grid-value">创造者 · 工程师</span>
+      </div>
+      <div class="hero-grid-divider"></div>
+      <div class="hero-grid-item reveal-bounce-hero">
+        <span class="hero-grid-label">在做</span>
+        <span class="hero-grid-value">Auris · Knowcraft</span>
+      </div>
+      <div class="hero-grid-divider"></div>
+      <div class="hero-grid-item reveal-bounce-hero">
+        <span class="hero-grid-label">关注</span>
+        <span class="hero-grid-value">AI · 产品 · 知识</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-deco" aria-hidden="true">01</div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #000;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-video.is-hidden {
+    display: none;
+  }
+
+  .hero-fallback {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30, 30, 40, 0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(20, 20, 30, 0.4) 0%, transparent 50%),
+      #000;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.75) 50%,
+      rgba(0, 0, 0, 0.92) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 32px;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 720px;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 64px;
+  }
+
+  .hero-grid {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 640px;
+  }
+
+  .hero-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    padding: 0 24px;
+  }
+
+  .hero-grid-item:first-child { padding-left: 0; }
+
+  .hero-grid-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .hero-grid-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .hero-grid-divider {
+    width: 1px;
+    height: 48px;
+    background: var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .hero-deco {
+    position: absolute;
+    right: 8%;
+    top: 18%;
+    font-family: var(--font-display);
+    font-size: clamp(120px, 20vw, 240px);
+    font-weight: 300;
+    -webkit-text-stroke: 1px #333;
+    color: transparent;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .hero-grid-divider {
+      width: 48px;
+      height: 1px;
+    }
+
+    .hero-grid-item { padding: 0; }
+
+    .hero-deco { display: none; }
+  }
+</style>
+
+<script>
+  const video = document.querySelector('.hero-video') as HTMLVideoElement;
+  if (video) {
+    video.addEventListener('error', () => video.classList.add('is-hidden'));
+    video.play().catch(() => video.classList.add('is-hidden'));
+  }
+</script>

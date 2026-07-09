@@ -1,0 +1,197 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Layout title="文章 · Portfolio">
+  <Nav />
+  <main class="writing-page">
+    <div class="container">
+      <div class="writing-header">
+        <div>
+          <span class="writing-breadcrumb">WRITING · 文章</span>
+          <h1 class="page-title">文章</h1>
+          <p class="page-desc">笑来分享合集——关于 AI、学习、生产与思考的笔记沉淀。</p>
+        </div>
+        <span class="writing-count">{posts.length} 篇</span>
+      </div>
+
+      <div class="series-banner">
+        <span class="series-badge">SERIES</span>
+        <span class="series-text">笑来分享合集 · 把文章串成有顺序的阅读线</span>
+      </div>
+
+      <div class="article-list">
+        {posts.map((post, i) => (
+          <a href={`/writing/${post.id}`} class="article-item">
+            <span class="article-index">{pad(i + 1)}</span>
+            <div class="article-body">
+              <div class="article-top">
+                <h2 class="article-title">{post.data.title}</h2>
+                <span class="article-date">{formatDate(post.data.date)}</span>
+              </div>
+              {post.data.description && <p class="article-excerpt">{post.data.description}</p>}
+              <div class="article-meta">
+                {post.data.readTime && <span>{post.data.readTime} 分钟</span>}
+                {post.data.tags?.slice(0, 3).map((tag) => (
+                  <span class="article-tag">#{tag}</span>
+                ))}
+              </div>
+            </div>
+            <span class="article-arrow">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script src="../../scripts/reveal-fade.ts"></script>
+
+<style>
+  .writing-page {
+    padding: 120px 0 80px;
+  }
+
+  .writing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .writing-breadcrumb {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-default);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+  }
+
+  .page-title {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .page-desc {
+    font-size: 16px;
+    color: var(--text-tertiary);
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .writing-count {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    padding-top: 8px;
+  }
+
+  .series-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 48px;
+  }
+
+  .series-badge {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border: 1px solid var(--border-default);
+    padding: 4px 8px;
+  }
+
+  .series-text {
+    font-size: 14px;
+    color: var(--text-tertiary);
+  }
+
+  .article-list {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .article-item {
+    display: grid;
+    grid-template-columns: 48px 1fr 24px;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.2s;
+  }
+
+  .article-item:hover {
+    background: var(--surface-hover);
+  }
+
+  .article-index {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-top: 6px;
+  }
+
+  .article-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+
+  .article-title {
+    font-size: clamp(20px, 3vw, 24px);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .article-date {
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+
+  .article-excerpt {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .article-arrow {
+    font-size: 14px;
+    color: var(--text-muted);
+    padding-top: 6px;
+  }
+
+  .article-item:hover .article-arrow {
+    color: var(--text-primary);
+  }
+</style>

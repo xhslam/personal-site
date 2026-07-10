@@ -1,4 +1,6 @@
 ---
+import SectionVideo from './SectionVideo.astro';
+
 const items = [
   {
     year: '进行中',
@@ -22,6 +24,7 @@ const items = [
 ---
 
 <section class="section now" id="now">
+  <SectionVideo src="/video/section-4.mp4" overlay="dark" />
   <div class="container">
     <div class="now-header reveal-bounce" data-reveal-delay="0ms">
       <span class="now-label-left">NOW · 正在发生</span>

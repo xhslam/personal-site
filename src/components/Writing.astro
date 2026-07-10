@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import SectionVideo from './SectionVideo.astro';
 
 const posts = (await getCollection('writing')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -14,6 +15,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section class="section writing" id="writing">
+  <SectionVideo src="/video/section-3.mp4" overlay="dark" />
   <div class="container">
     <div class="writing-header">
       <div>
@@ -108,7 +110,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     display: flex;
     align-items: center;
     gap: 16px;
-    background: var(--bg-card);
+    background: rgba(17, 17, 17, 0.75);
     border-radius: 8px;
     padding: 16px 20px;
     margin-bottom: 48px;

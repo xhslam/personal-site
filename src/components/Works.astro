@@ -1,4 +1,6 @@
 ---
+import SectionVideo from './SectionVideo.astro';
+
 const projects = [
   {
     name: 'Auris',
@@ -20,6 +22,7 @@ const projects = [
 ---
 
 <section class="section works" id="works">
+  <SectionVideo src="/video/section-2.mp4" overlay="dark" />
   <div class="container">
     <div class="works-header">
       <div>
@@ -97,6 +100,7 @@ const projects = [
     border-bottom: 1px solid var(--border-subtle);
     transition: background 0.2s;
     min-height: 320px;
+    background: rgba(0, 0, 0, 0.45);
   }
 
   .bento-cell:nth-child(2n) { border-right: none; }

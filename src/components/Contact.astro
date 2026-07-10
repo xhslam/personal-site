@@ -1,8 +1,11 @@
 ---
+import SectionVideo from './SectionVideo.astro';
+
 const GITHUB_URL = 'https://github.com/phandung2ea5d4-oss';
 ---
 
 <section class="section contact" id="contact">
+  <SectionVideo src="/video/section-5.mp4" overlay="dark" />
   <div class="container">
     <span class="contact-tag reveal-bounce" data-reveal-delay="0ms">CONTACT · 联系</span>
     <h2 class="section-title reveal-bounce" data-reveal-delay="80ms">想取得联系？</h2>
@@ -72,6 +75,7 @@ const GITHUB_URL = 'https://github.com/phandung2ea5d4-oss';
   .contact-card {
     border: 1px solid var(--border-default);
     padding: 48px;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .contact-card-label {

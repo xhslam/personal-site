@@ -63,6 +63,12 @@ video {
 .section {
   padding: 120px 0;
   position: relative;
+  overflow: hidden;
+}
+
+.section > .container {
+  position: relative;
+  z-index: 3;
 }
 
 .section-label {

@@ -1,22 +1,9 @@
 ---
+import SectionVideo from './SectionVideo.astro';
 ---
 
 <section class="hero" id="hero">
-  <div class="hero-video-wrap">
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-    >
-      <source src="/video/hero-bg.mp4" type="video/mp4" />
-      <source src="/video/hero-bg.mov" type="video/quicktime" />
-    </video>
-    <div class="hero-overlay"></div>
-    <div class="hero-fallback" aria-hidden="true"></div>
-  </div>
+  <SectionVideo src="/video/section-1.mp4" overlay="medium" />
 
   <div class="hero-content container">
     <p class="hero-label reveal-bounce-hero">FIRST PRINCIPLES · 创造与构建 · 自 2024</p>
@@ -58,47 +45,9 @@
     overflow: hidden;
   }
 
-  .hero-video-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: #000;
-  }
-
-  .hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-video.is-hidden {
-    display: none;
-  }
-
-  .hero-fallback {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(30, 30, 40, 0.6) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(20, 20, 30, 0.4) 0%, transparent 50%),
-      #000;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.75) 50%,
-      rgba(0, 0, 0, 0.92) 100%
-    );
-  }
-
   .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     padding-top: 120px;
     padding-bottom: 80px;
   }
@@ -175,7 +124,7 @@
     -webkit-text-stroke: 1px #333;
     color: transparent;
     opacity: 0.15;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     user-select: none;
   }
@@ -197,16 +146,3 @@
     .hero-deco { display: none; }
   }
 </style>
-
-<script>
-  const video = document.querySelector('.hero-video') as HTMLVideoElement;
-  if (video) {
-    video.addEventListener('loadeddata', () => video.classList.remove('is-hidden'));
-    video.addEventListener('emptied', () => {
-      if (video.error) video.classList.add('is-hidden');
-    });
-    video.play().catch(() => {
-      /* autoplay blocked — video still visible, user can tap to play */
-    });
-  }
-</script>

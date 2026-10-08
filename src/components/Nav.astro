@@ -11,34 +11,30 @@ const links = [
 <div class="nav-wrap" id="nav">
   <nav class="nav">
     <div class="nav-inner reveal-bounce-hero">
-    <a href="/" class="nav-logo">
-      <span class="nav-logo-dot"></span>
-      PORTFOLIO
-    </a>
-    <div class="nav-links">
-      {links.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
-    </div>
-    <div class="nav-actions">
-      <button class="nav-menu-btn" id="menu-btn" aria-label="菜单">
-        <span></span>
-        <span></span>
-      </button>
-      <button type="button" class="nav-cta" data-wechat-modal>扫码关注</button>
-      <button class="nav-share" aria-label="分享">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <circle cx="12" cy="3" r="2" stroke="currentColor" stroke-width="1.2"/>
-          <circle cx="12" cy="13" r="2" stroke="currentColor" stroke-width="1.2"/>
-          <circle cx="3" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/>
-          <line x1="5" y1="7" x2="10" y2="4" stroke="currentColor" stroke-width="1.2"/>
-          <line x1="5" y1="9" x2="10" y2="12" stroke="currentColor" stroke-width="1.2"/>
-        </svg>
-      </button>
-    </div>
+      <a href="/" class="nav-logo">
+        <span class="nav-logo-dot"></span>
+        PORTFOLIO
+      </a>
+      <div class="nav-links" id="nav-links">
+        {links.map((link) => (
+          <a href={link.href} class="nav-link">{link.label}</a>
+        ))}
+        <button type="button" class="nav-cta nav-cta-mobile" data-wechat-modal>
+          扫码关注
+        </button>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-menu-btn" id="menu-btn" type="button" aria-label="菜单" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+        </button>
+        <button type="button" class="nav-cta nav-cta-desktop" data-wechat-modal>扫码关注</button>
+      </div>
     </div>
   </nav>
 </div>
+
+<div class="nav-backdrop" id="nav-backdrop" hidden></div>
 
 <style>
   .nav-wrap {
@@ -66,6 +62,7 @@ const links = [
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border-strong);
     border-radius: 9999px;
+    position: relative;
   }
 
   .nav-logo {
@@ -76,6 +73,8 @@ const links = [
     font-weight: 700;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    position: relative;
+    z-index: 2;
   }
 
   .nav-logo-dot {
@@ -88,12 +87,16 @@ const links = [
   .nav-links {
     display: flex;
     gap: 24px;
+    align-items: center;
   }
 
   .nav-link {
     font-size: 13px;
     color: var(--text-tertiary);
     transition: color 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .nav-link:hover {
@@ -104,20 +107,44 @@ const links = [
     display: flex;
     align-items: center;
     gap: 12px;
+    position: relative;
+    z-index: 2;
   }
 
   .nav-menu-btn {
     display: none;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 12px;
+    margin: -8px;
+    min-width: 44px;
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .nav-menu-btn span:first-child { width: 16px; height: 1.5px; background: var(--text-primary); }
-  .nav-menu-btn span:last-child { width: 12px; height: 1.5px; background: var(--text-primary); }
+  .nav-menu-btn span {
+    display: block;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: transform 0.2s, width 0.2s, opacity 0.2s;
+  }
+
+  .nav-menu-btn span:first-child { width: 16px; }
+  .nav-menu-btn span:last-child { width: 12px; }
+
+  .nav-wrap.is-open .nav-menu-btn span:first-child {
+    width: 16px;
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .nav-wrap.is-open .nav-menu-btn span:last-child {
+    width: 16px;
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
 
   .nav-cta {
     font-size: 13px;
@@ -131,25 +158,120 @@ const links = [
     border: none;
     cursor: pointer;
     font-family: inherit;
+    min-height: 36px;
   }
 
   .nav-cta:hover { opacity: 0.9; }
 
-  .nav-share {
-    background: none;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    transition: color 0.2s;
+  .nav-cta-mobile {
+    display: none;
   }
 
-  .nav-share:hover { color: var(--text-primary); }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .nav-backdrop[hidden] {
+    display: none;
+  }
 
   @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-menu-btn { display: flex; }
-    .nav-cta { display: none; }
+    .nav-wrap {
+      top: 16px;
+      width: calc(100% - 32px);
+    }
+
+    .nav-cta-desktop {
+      display: none;
+    }
+
+    .nav-menu-btn {
+      display: flex;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-wrap.is-open .nav-links {
+      display: flex;
+    }
+
+    .nav-link {
+      width: 100%;
+      padding: 14px 16px;
+      color: var(--text-primary);
+      font-size: 15px;
+      border-radius: 12px;
+    }
+
+    .nav-link:active {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-cta-mobile {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px 16px;
+      min-height: 48px;
+    }
   }
 </style>
+
+<script>
+  function initMobileNav() {
+    const wrap = document.getElementById('nav');
+    const btn = document.getElementById('menu-btn');
+    const backdrop = document.getElementById('nav-backdrop');
+    const links = document.getElementById('nav-links');
+    if (!wrap || !btn || !backdrop || !links) return;
+
+    const close = () => {
+      wrap.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      backdrop.hidden = true;
+      document.body.style.overflow = '';
+    };
+
+    const open = () => {
+      wrap.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      backdrop.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (wrap.classList.contains('is-open')) close();
+      else open();
+    });
+
+    backdrop.addEventListener('click', close);
+
+    links.querySelectorAll('a, button').forEach((el) => {
+      el.addEventListener('click', () => close());
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) close();
+    });
+  }
+
+  initMobileNav();
+</script>

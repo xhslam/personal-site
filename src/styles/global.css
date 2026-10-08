@@ -175,7 +175,7 @@ video {
   color: var(--text-body);
 }
 
-.prose-article :global(h2) {
+.prose-article h2 {
   font-size: 28px;
   font-weight: 700;
   color: var(--text-primary);
@@ -184,7 +184,7 @@ video {
   line-height: 1.3;
 }
 
-.prose-article :global(h3) {
+.prose-article h3 {
   font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
@@ -192,45 +192,45 @@ video {
   margin-bottom: 16px;
 }
 
-.prose-article :global(p) {
+.prose-article p {
   margin-bottom: 24px;
 }
 
-.prose-article :global(strong) {
+.prose-article strong {
   color: var(--text-primary);
   font-weight: 600;
 }
 
-.prose-article :global(ul),
-.prose-article :global(ol) {
+.prose-article ul,
+.prose-article ol {
   margin-bottom: 24px;
   padding-left: 24px;
 }
 
-.prose-article :global(li) {
+.prose-article li {
   margin-bottom: 8px;
 }
 
-.prose-article :global(blockquote) {
+.prose-article blockquote {
   border-left: 2px solid var(--border-default);
   padding-left: 24px;
   margin: 32px 0;
   color: var(--text-tertiary);
 }
 
-.prose-article :global(a) {
+.prose-article a {
   color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.prose-article :global(hr) {
+.prose-article hr {
   border: none;
   border-top: 1px solid var(--border-subtle);
   margin: 48px 0;
 }
 
-.prose-article :global(code) {
+.prose-article code {
   font-family: var(--font-mono);
   font-size: 0.9em;
   background: var(--bg-card);

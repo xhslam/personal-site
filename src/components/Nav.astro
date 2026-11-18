@@ -2,6 +2,7 @@
 const isHome = Astro.url.pathname === '/';
 const links = [
   { href: isHome ? '#works' : '/#works', label: '作品' },
+  { href: '/downloads', label: '下载' },
   { href: '/writing', label: '文章' },
   { href: isHome ? '#now' : '/#now', label: '当下' },
   { href: isHome ? '#contact' : '/#contact', label: '联系' },

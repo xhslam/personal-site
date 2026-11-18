@@ -3,12 +3,31 @@ import SectionVideo from './SectionVideo.astro';
 
 const projects = [
   {
+    name: 'Gamma',
+    tagline: '本地优先的 AI 桌面 Agent',
+    description: 'Gamma 是为专业用户设计的本地优先 AI 桌面 Agent。',
+    status: '可下载',
+    meta: 'Agent · 2026',
+    href: '/downloads#gamma',
+    linkLabel: '立即下载',
+  },
+  {
     name: 'Auris',
     tagline: '智能音频感知与交互平台',
     description: '从声音到洞察——Auris 让机器真正「听懂」环境与人声，将音频流转化为可行动的结构化信息。',
-    status: '运营中',
+    status: '可下载',
     meta: 'Audio AI · 2025',
-    href: '#',
+    href: '/downloads#auris',
+    linkLabel: '立即下载',
+  },
+  {
+    name: 'Mira',
+    tagline: 'Android 应用',
+    description: '获取 Mira 最新 Android 安装包。',
+    status: '可下载',
+    meta: 'Android · 2026',
+    href: '/downloads#mira',
+    linkLabel: '立即下载',
   },
   {
     name: 'Knowcraft',
@@ -17,6 +36,7 @@ const projects = [
     status: '运营中',
     meta: 'Agent · 2026',
     href: '#',
+    linkLabel: '了解详情',
   },
 ];
 ---
@@ -49,7 +69,7 @@ const projects = [
           <p class="bento-tagline">{project.tagline}</p>
           <p class="bento-desc">{project.description}</p>
           <div class="bento-footer">
-            <span>了解详情</span>
+            <span>{project.linkLabel}</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.2"/>
             </svg>

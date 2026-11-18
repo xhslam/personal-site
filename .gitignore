@@ -9,4 +9,5 @@ dist/
 public/video/*.mov
 public/video/hero-bg.mov
 .vercel
+.edgeone/
 .env*

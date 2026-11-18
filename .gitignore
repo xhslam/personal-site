@@ -8,3 +8,5 @@ dist/
 # 本地大视频不提交，部署用压缩版 hero-bg.mp4
 public/video/*.mov
 public/video/hero-bg.mov
+.vercel
+.env*
